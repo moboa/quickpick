@@ -1,5 +1,7 @@
 import { List, Map } from '../node_modules/immutable';
 
+export const INITIAL_STATE = Map();
+
 /**
  * Return winner or winners of the current vote.
  * @param {Map} vote 
@@ -44,10 +46,10 @@ export function next(state) {
 
 /**
  * Increment the vote talley for the entry.
- * @param {Map} state 
+ * @param {Map} voteState 
  * @param {string} entry 
- * @returns {Map} updated state
+ * @returns {Map} updated voteState
  */
-export function vote(state, entry) {
-    return state.updateIn(['vote', 'tally', entry], 0, tally => tally + 1);
+export function vote(voteState, entry) {
+    return voteState.updateIn(['tally', entry], 0, tally => tally + 1);
 }

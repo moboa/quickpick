@@ -94,45 +94,33 @@ describe('Application Logic', () => {
     describe('vote', () => {
 
         it('creates a tally for the voted entry', () => {
-            const state = Map({
-                vote: Map({
-                    pair: List.of('Portal', 'Batman: Arkham City')
-                }),
-                entries: List()
+            const voteState = Map({
+                pair: List.of('Portal', 'Batman: Arkham City')
             });
-            const nextState = vote(state, 'Portal');
-            expect(nextState).to.equal(Map({
-                vote: Map({
-                    pair: List.of('Portal', 'Batman: Arkham City'),
-                    tally: Map({
-                        'Portal': 1
-                    })
-                }),
-                entries: List()
+            const nextVoteState = vote(voteState, 'Portal');
+            expect(nextVoteState).to.equal(Map({
+                pair: List.of('Portal', 'Batman: Arkham City'),
+                tally: Map({
+                    'Portal': 1
+                })
             }));
         });
 
         it('adds to existing tally for the voted entry', () => {
-            const state = Map({
-                vote: Map({
-                    pair: List.of('Portal', 'Batman: Arkham City'),
-                    tally: Map({
-                        'Portal': 4,
-                        'Batman: Arkham City': 4
-                    })
-                }),
-                entries: List()
+            const voteState = Map({
+                pair: List.of('Portal', 'Batman: Arkham City'),
+                tally: Map({
+                    'Portal': 4,
+                    'Batman: Arkham City': 4
+                })
             });
-            const nextState = vote(state, 'Portal');
-            expect(nextState).to.equal(Map({
-                vote: Map({
-                    pair: List.of('Portal', 'Batman: Arkham City'),
-                    tally: Map({
-                        'Portal': 5,
-                        'Batman: Arkham City': 4
-                    })
-                }),
-                entries: List()
+            const nextVoteState = vote(voteState, 'Portal');
+            expect(nextVoteState).to.equal(Map({
+                pair: List.of('Portal', 'Batman: Arkham City'),
+                tally: Map({
+                    'Portal': 5,
+                    'Batman: Arkham City': 4
+                })
             }));
         });
     });
