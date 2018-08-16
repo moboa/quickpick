@@ -6,5 +6,5 @@ import registerServiceWorker from './registerServiceWorker';
 
 const pair = ['Phoenix Wright', 'Shadow Of The Colossus'];
 
-ReactDOM.render(<Voting pair={pair} />, document.getElementById('root'));
+ReactDOM.render(<Voting pair={pair} hasVoted="Phoenix Wright" />, document.getElementById('root'));
 registerServiceWorker();
