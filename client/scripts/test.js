@@ -19,7 +19,7 @@ require('../config/env');
 exec('mocha --require babel-core/register --require ./test/testHelper.js \"test/**/*@(.js|.jsx)\"',
     (err, stdout, stderr) => {
         console.log(stdout);
-        if (err) {
+        if (stdout === '' && err) {
             console.log(err);
         }
     }

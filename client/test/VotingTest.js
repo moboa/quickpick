@@ -6,6 +6,7 @@ import {
     scryRenderedDOMComponentsWithTag,
     Simulate
 } from 'react-dom/test-utils';
+import { List } from 'immutable';
 import Voting from '../src/components/Voting';
 
 describe('Voting', () => {
@@ -61,11 +62,50 @@ describe('Voting', () => {
             <Voting winner="Phoenix Wright" />
         );
         const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
-        
         expect(buttons.length).to.equal(0);
 
         const winner = ReactDOM.findDOMNode(component.refs.winner);
         expect(winner).to.not.be.null;
         expect(winner.textContent).to.be.contain('Phoenix Wright');
+    });
+
+    it('renders as pure component', () => {
+        const pair = ['Phoenix Wright', 'Shadow Of The Colossus'];
+        const container = document.createElement('div');
+        let component = ReactDOM.render(
+            <Voting pair={pair} />,
+            container
+        );
+
+        let firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+        expect(firstButton.textContent).to.equal('Phoenix Wright');
+
+        pair[0] = 'Bioshock'
+        component = ReactDOM.render(
+            <Voting pair={pair} />,
+            container
+        );
+        firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+        expect(firstButton.textContent).to.equal('Phoenix Wright');
+    });
+
+    it('does update DOM when prop changes', () => {
+        const pair = List.of('Phoenix Wright', 'Shadow Of The Colossus');
+        const container = document.createElement('div');
+        let component = ReactDOM.render(
+            <Voting pair={pair} />,
+            container
+        );
+
+        let firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+        expect(firstButton.textContent).to.equal('Phoenix Wright');
+
+        const newPair = pair.set(0, 'Bioshock');
+        component = ReactDOM.render(
+            <Voting pair={pair} />,
+            container
+        );
+        firstButton = scryRenderedDOMComponentsWithTag(component, 'button')[0];
+        expect(firstButton.textContent).to.equal('Phoenix Wright');
     });
 });

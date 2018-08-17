@@ -1,10 +1,12 @@
 import React from 'react';
 
-export default class Vote extends React.Component {
+export default class Vote extends React.PureComponent {
+    // Get the 2 entries to vote on.
     getPair() {
         return this.props.pair || [];
     }
 
+    // Return true if the user has voted.
     isDisabled() {
         return !!this.props.hasVoted;
     }
