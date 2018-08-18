@@ -65,7 +65,7 @@ describe('Voting', () => {
         expect(buttons.length).to.equal(0);
 
         const winner = ReactDOM.findDOMNode(component.refs.winner);
-        expect(winner).to.not.be.null;
+        expect(winner).to.exist;
         expect(winner.textContent).to.be.contain('Phoenix Wright');
     });
 
