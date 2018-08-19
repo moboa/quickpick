@@ -1,16 +1,17 @@
 import React from 'react';
+import { hot } from 'react-hot-loader';
 import { Route } from 'react-router-dom';
-import Voting from './Voting';
-import Results from './Results';
+import { VotingContainer } from './Voting';
+import { ResultsContainer } from './Results';
 
 export default class App extends React.Component {
     render() {
         return <div>
             <Route path="/" 
-                render={() => <Voting {...this.props}/>} 
+                render={() => <VotingContainer {...this.props}/>} 
             /> 
             <Route path="/results" 
-                render={() => <Results {...this.props} />}
+                render={() => <ResultsContainer {...this.props} />}
             />
         </div>;
     }

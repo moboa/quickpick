@@ -3,13 +3,11 @@ import ReactDOM from 'react-dom';
 import { HashRouter, Route } from 'react-router-dom';
 import { List, Map } from 'immutable';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import reducer from './reducer';
-
-const pair = List.of('Phoenix Wright', 'Shadow Of The Colossus');
-const tally = Map({'Phoenix Wright': 4, 'Shadow Of The Colossus': 2});
 
 const store = createStore(reducer);
 store.dispatch({
@@ -23,9 +21,11 @@ store.dispatch({
 });
 
 ReactDOM.render(
-    <HashRouter>
-        <Route render={() => <App pair={pair} tally={tally} />} />
-    </HashRouter>, 
+    <Provider store={store}>
+        <HashRouter>
+            <Route component={App}/>
+        </HashRouter>
+    </Provider>, 
     document.getElementById('root')
 );
 registerServiceWorker();

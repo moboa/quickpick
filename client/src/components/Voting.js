@@ -1,9 +1,9 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
+import { connect } from 'react-redux';
 import Winner from './Winner';
 import Vote from './Vote';
 
-class Voting extends React.PureComponent {
+export class Voting extends React.PureComponent {
     render() {
         return <div>
             {this.props.winner ? 
@@ -14,4 +14,13 @@ class Voting extends React.PureComponent {
     }
 }
 
-export default hot(module)(Voting);
+// Add state properties to React component props.
+function mapStateToProps(state) {
+    return {
+        pair: state.getIn(['vote', 'pair']),
+        winner: state.get('winner')
+    };
+}
+
+
+export const VotingContainer = connect(mapStateToProps)(Voting);
