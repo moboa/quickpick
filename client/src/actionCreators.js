@@ -8,6 +8,15 @@ export function setState(state) {
 export function vote(entry) {
     return {
         type: 'VOTE',
-        entry: entry
-    }
+        entry: entry,
+        meta: { remote: true }
+    };
+}
+
+
+export function next() {
+    return {
+        type: 'NEXT',
+        meta: { remote: true }
+    };
 }
